@@ -3,7 +3,7 @@ import { Product } from '../../models/models.js';
 const getAllProducts = async (req, res) => {
     try {
         let { page, limit, productCategory } = req.query;
-        console.log(req.query)
+
         page = page || 1;
         limit = limit || 20;
         let offset = page * limit - limit;  
