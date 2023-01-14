@@ -62,7 +62,7 @@ const getUser = async (req, res) => {
 
         res.json({...user.dataValues, token});
     } catch (error) {
-        res.status(404).json({message: "Не удалось получить данные о пользователе"}); 
+        res.status(404).json({message: "Не удалось получить данные пользователя"}); 
     };
 };
 
