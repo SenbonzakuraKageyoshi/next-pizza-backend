@@ -43,6 +43,54 @@ const getAllSelectedProducts = async (req, res) => {
     }
 };
 
+const incrementSelectedProductsNumber = async (req, res) => {
+    try {
+        const { id, UserId } = req.body;
+
+        const selectedProduct = await SelectedProduct.findOne({where: { id }})
+
+        if(!selectedProduct){
+            return res.status(404).json({message: 'Не удалось увеличить число продукта'})
+        };
+
+        await SelectedProduct.increment(['productsNumber'], {where: { id }})
+        
+        const newSelectedProducts = await SelectedProduct.findAll({ where: { UserId }, include: [{ model: Product }] })
+
+        res.json(newSelectedProducts);
+        
+    } catch (error) {
+        console.log(error);
+        res.json({message: 'Не удалось увеличить число продукта'})
+    }
+};
+
+const decrementSelectedProductsNumber = async (req, res) => {
+    try {
+        const { id, UserId } = req.body;
+
+        const selectedProduct = await SelectedProduct.findOne({where: { id }})
+
+        if(!selectedProduct){
+            return res.status(404).json({message: 'Не удалось уменьшить число продукта'})
+        };
+
+        await SelectedProduct.decrement(['productsNumber'], {where: { id }})
+        
+        const newSelectedProducts = await SelectedProduct.findAll({ where: { UserId }, include: [{ model: Product }] })
+
+        res.json(newSelectedProducts);
+        
+    } catch (error) {
+        console.log(error);
+        res.json({message: 'Не удалось уменьшить число продукта'})
+    }
+};
+
 export {
-    getAllProducts, selectProduct, getAllSelectedProducts
+    getAllProducts, 
+    selectProduct, 
+    getAllSelectedProducts, 
+    incrementSelectedProductsNumber,
+    decrementSelectedProductsNumber
 }
