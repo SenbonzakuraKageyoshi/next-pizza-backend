@@ -8,6 +8,10 @@ const User = sequelize.define('User', {
     userMail: {type: DataTypes.STRING, allowNull: false},
     userTelephone: {type: DataTypes.STRING, allowNull: false},
     userPasswordHash: {type: DataTypes.STRING, allowNull: false},
+    userCity: {type: DataTypes.STRING, allowNull: true, defaultValue: ''},
+    userAdress: {type: DataTypes.STRING, allowNull: true, defaultValue: ''},
+    userHouseNumber: {type: DataTypes.STRING, allowNull: true, defaultValue: ''},
+    userApartmentNumber: {type: DataTypes.STRING, allowNull: true, defaultValue: ''},
 });
 
 const Product = sequelize.define('Product', {

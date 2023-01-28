@@ -21,7 +21,13 @@ const selectProduct = async (req, res) => {
     try {
         const { ProductId, UserId } = req.body;
 
-        const selectedProduct = await SelectedProduct.create({ProductId, UserId});
+        const selectedProduct = await SelectedProduct.findOne({where: {ProductId, UserId}});
+
+        if(!selectedProduct){
+            await SelectedProduct.create({ProductId, UserId});
+        }else{
+            await SelectedProduct.increment(['productsNumber'], {where: { ProductId }});
+        }
 
         res.json({message: 'Продукт добавлен в корзину'})
     } catch (error) {
