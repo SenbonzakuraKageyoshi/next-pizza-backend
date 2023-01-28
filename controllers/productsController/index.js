@@ -21,12 +21,25 @@ const selectProduct = async (req, res) => {
     try {
         const { ProductId, UserId } = req.body;
 
-        await SelectedProduct.create({ProductId, UserId});
+        const selectedProduct = await SelectedProduct.create({ProductId, UserId});
 
         res.json({message: 'Продукт добавлен в корзину'})
     } catch (error) {
         console.log(error);
         res.json({message: 'Не удалось добавить продукт в корзину'})
+    }
+}
+
+const removeProduct = async (req, res) => {
+    try {
+        const { ProductId, UserId } = req.body;
+
+        await SelectedProduct.destroy({where: {ProductId, UserId}});
+
+        res.json({message: 'Продукт удален из корзины'})
+    } catch (error) {
+        console.log(error);
+        res.json({message: 'Не удалось удалить продукт из корзины'})
     }
 }
 
@@ -92,5 +105,6 @@ export {
     selectProduct, 
     getAllSelectedProducts, 
     incrementSelectedProductsNumber,
-    decrementSelectedProductsNumber
+    decrementSelectedProductsNumber,
+    removeProduct
 }
