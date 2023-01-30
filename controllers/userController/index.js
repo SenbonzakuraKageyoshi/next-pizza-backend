@@ -23,6 +23,20 @@ const getUser = async (req, res) => {
     };
 };
 
+const updateUser = async (req, res) => {
+    try {
+        const { ...userInfo } = req.body;
+
+        await User.update({...userInfo}, {where: {id: userInfo.id}});
+
+        res.json({message: 'Данные профиля успешно обновлены'})
+    } catch (error) {
+        console.log(error)
+        res.json({message: 'Не удалось обновить данные профиля'})
+    }
+}
+
 export {
-    getUser
+    getUser,
+    updateUser
 };
