@@ -28,11 +28,18 @@ const SelectedProduct = sequelize.define('SelectedProduct', {
     productsNumber: {type: DataTypes.INTEGER, allowNull: false, defaultValue: 1}
 });
 
+const Order = sequelize.define('Order', {
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
+    orderData: {type: DataTypes.TEXT, allowNull: false},
+});
+
 Product.belongsToMany(User, {through: SelectedProduct});
 User.belongsToMany(Product, {through: SelectedProduct});
 
 SelectedProduct.belongsTo(Product);
 
+Order.belongsTo(User);
+
 export {
-    User, Product, SelectedProduct
+    User, Product, SelectedProduct, Order
 }

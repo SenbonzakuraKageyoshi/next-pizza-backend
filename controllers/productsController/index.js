@@ -49,6 +49,19 @@ const removeProduct = async (req, res) => {
     }
 }
 
+const removeAllProducts = async (req, res) => {
+    try {
+        const { UserId } = req.body;
+
+        await SelectedProduct.destroy({where: {UserId}});
+
+        res.json({message: 'Корзина очищена'})
+    } catch (error) {
+        console.log(error);
+        res.json({message: 'Не удалось очистить корзину'})
+    }
+}
+
 const getAllSelectedProducts = async (req, res) => {
     try {
         const { UserId } = req.body;
@@ -112,5 +125,6 @@ export {
     getAllSelectedProducts, 
     incrementSelectedProductsNumber,
     decrementSelectedProductsNumber,
-    removeProduct
+    removeProduct,
+    removeAllProducts
 }
