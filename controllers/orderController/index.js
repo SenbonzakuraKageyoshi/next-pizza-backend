@@ -1,6 +1,6 @@
 import { Order } from "../../models/models.js";
 
-export const createOrder = async (req, res) => {
+const createOrder = async (req, res) => {
     try {
         const { UserId, orderData } = req.body;
 
@@ -11,3 +11,20 @@ export const createOrder = async (req, res) => {
         res.json({message: 'Не удалось создать заказ'});
     }
 };
+
+const getOrders = async (req, res) => {
+    try {
+        const { UserId } = req.body;
+
+        const orders = await Order.findAll({where: { UserId }});
+
+        res.json(orders);
+    } catch (error) {
+        res.json({message: 'Не удалось получить заказы'});
+    }
+};
+
+export {
+    createOrder,
+    getOrders
+}
