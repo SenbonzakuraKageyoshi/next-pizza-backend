@@ -18,7 +18,6 @@ const Product = sequelize.define('Product', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false},
     productName: {type: DataTypes.STRING, allowNull: false},
     productDescription: {type: DataTypes.STRING, allowNull: false},
-    productCategory: {type: DataTypes.STRING, allowNull: false},
     productImage: {type: DataTypes.STRING, allowNull: false},
     productPrice: {type: DataTypes.INTEGER, allowNull: false, defaultValue: 0},
 });

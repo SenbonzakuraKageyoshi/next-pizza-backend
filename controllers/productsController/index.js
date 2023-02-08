@@ -2,13 +2,13 @@ import { Product, SelectedProduct } from '../../models/models.js';
 
 const getAllProducts = async (req, res) => {
     try {
-        let { page, limit, productCategory } = req.query;
+        let { page, limit } = req.query;
 
         page = page || 1;
         limit = limit || 20;
         let offset = page * limit - limit;  
 
-        const products = await Product.findAll({where: {productCategory}, limit, offset});
+        const products = await Product.findAll({limit, offset});
 
         res.json(products);
     } catch (error) {
